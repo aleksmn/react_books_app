@@ -12,10 +12,13 @@ function App() {
       {/* <Books /> */}
 
       <Routes>
+
         <Route path="/" element={< Home />} />
         <Route path="/books" element={< Books />} />
         <Route path="/about" element={< About />} />
         <Route path="/contacts" element={< Contacts />} />
+        {/* <Route path="/" element={<Navigate to="/books" />} /> */}
+
       </Routes>
     </main>
   );
