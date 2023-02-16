@@ -70,7 +70,7 @@ class Books extends Component {
 
     const pagedBooks = paginate(sortedBooks, currentPage, pageSize);
 
-    return { totalCount: filteredBooks.length, books: pagedBooks  }
+    return { totalCount: filteredBooks.length, books: pagedBooks }
   }
 
   render() {
@@ -82,31 +82,34 @@ class Books extends Component {
     const result = this.getPagedData()
 
     return (
-      <div className='row'>
-        <div className="col-lg-2 my-5">
-          <ListGroup
-            items={genres}
-            onItemSelect={this.handleGenreSelect}
-            selectedItem={selectedGenre}
-          />
+      <>
+        <h1>Список для чтения</h1>
+        <div className='row'>
+          <div className="col-lg-2 my-5">
+            <ListGroup
+              items={genres}
+              onItemSelect={this.handleGenreSelect}
+              selectedItem={selectedGenre}
+            />
+          </div>
+          <div className="col">
+            <p>В списке книг: {result.totalCount}</p>
+            <BooksTable
+              books={result.books}
+              sortColumn={sortColumn}
+              onLike={this.handleLike}
+              onDelete={this.handleDelete}
+              onSort={this.handleSort}
+            />
+            <Pagination
+              itemsCount={result.totalCount}
+              pageSize={pageSize}
+              onPageChange={this.handlePageChange}
+              currentPage={currentPage}
+            />
+          </div>
         </div>
-        <div className="col">
-          <p>В списке книг: {result.totalCount}</p>
-          <BooksTable 
-            books={result.books}
-            sortColumn={sortColumn}
-            onLike={this.handleLike}
-            onDelete={this.handleDelete} 
-            onSort={this.handleSort}
-          />
-          <Pagination
-            itemsCount={result.totalCount}
-            pageSize={pageSize}
-            onPageChange={this.handlePageChange}
-            currentPage={currentPage}
-          />
-        </div>
-      </div>);
+      </>);
   }
 }
 
