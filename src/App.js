@@ -4,6 +4,7 @@ import Books from './components/books';
 import About from './components/about';
 import Contacts from './components/contacts';
 import NotFound from './components/notFound';
+import NavBar from './components/common/navBar';
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
     <main className='container py-4 py-lg-5'>
       {/* <h2>Список для чтения</h2> */}
       {/* <Books /> */}
+
+      <NavBar/>
 
       <Routes>
         
