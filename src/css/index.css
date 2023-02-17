@@ -1,7 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Kurale&family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+
 body {
-    font-family: monospace;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
+}
+
+.navbar {
+    letter-spacing: 1px;
+    font-weight: 300;
+
+}
+
+.navbar .active {
+    font-weight: 400;
 }
 
 h2 {
