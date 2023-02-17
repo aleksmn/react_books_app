@@ -24,3 +24,11 @@ h2 {
 .clickable {
     cursor: pointer;
 }
+
+.table a:not(.btn) {
+    text-decoration: none;
+}
+
+.table a:not(.btn):hover {
+    text-decoration: underline;
+}

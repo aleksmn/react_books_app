@@ -5,6 +5,7 @@ import About from './components/about';
 import Contacts from './components/contacts';
 import NotFound from './components/notFound';
 import NavBar from './components/common/navBar';
+import Book from './components/book';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
 
           {/* <Route path="/" element={< Home />} /> */}
           <Route path="/books" element={< Books />} />
+          <Route path="/books/:id" element={< Book />} />
           <Route path="/about" element={< About />} />
           <Route path="/contacts" element={< Contacts />} />
           <Route path="*" element={< NotFound />} />

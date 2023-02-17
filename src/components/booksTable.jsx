@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Like from './common/like';
 import Table from './common/table';
+
+
 class BooksTable extends Component {
   columns = [
-    { path: 'title', label: 'Название' },
+    { path: 'title', label: 'Название', content: book => <Link to={`/books/${book._id}`} >{book.title}</Link> },
     { path: 'author', label: 'Автор' },
     { path: 'genre.name', label: 'Жанр' },
     { path: 'pages', label: 'Стр.' },
@@ -12,8 +15,6 @@ class BooksTable extends Component {
     { key: 'like', content: book => <Like liked={book.liked} onLikeToggle={() => this.props.onLike(book)} /> },
     { key: 'delete', content: book => <button onClick={() => this.props.onDelete(book)} className="btn btn-danger btn-sm">Удалить</button> }
   ];
-
-
 
   render() {
 
