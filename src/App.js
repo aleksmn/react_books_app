@@ -1,6 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Books from './components/books';
-import Home from './components/home';
+// import Home from './components/home';
 import About from './components/about';
 import Contacts from './components/contacts';
 import NotFound from './components/notFound';
@@ -13,13 +13,13 @@ function App() {
       {/* <Books /> */}
 
       <Routes>
-
-        <Route path="/" element={< Home />} />
+        
+        {/* <Route path="/" element={< Home />} /> */}
         <Route path="/books" element={< Books />} />
         <Route path="/about" element={< About />} />
         <Route path="/contacts" element={< Contacts />} />
         <Route path="*" element={< NotFound />} />
-        {/* <Route path="/" element={<Navigate to="/books" />} /> */}
+        <Route path="/" element={<Navigate to="/books" />} />
 
       </Routes>
     </main>
