@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="mb-5 navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
                 <NavLink className="navbar-brand" href="#">Navbar</NavLink>
                 <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">

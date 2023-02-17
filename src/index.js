@@ -4,9 +4,12 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
-import './css/bootstrap-superhero.min.css'
-// import './css/index.css'
+import "bootstrap/dist/js/bootstrap.min.js";
+import './css/bootstrap-superhero.min.css';
 import 'font-awesome/css/font-awesome.css';
+
+import './css/index.css'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
