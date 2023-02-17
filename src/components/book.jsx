@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { getBooks } from '../services/bookService';
 
 const Book = () => {
@@ -17,6 +17,8 @@ const Book = () => {
                 <li>Жанр: {book.genre['name']}</li>
                 <li>{book.pages} стр.</li>
             </ul>
+
+            <Link to={'/books'} >К списку книг</Link>
         </>
     );
 }

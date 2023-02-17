@@ -25,6 +25,15 @@ h2 {
     cursor: pointer;
 }
 
+a {
+    color: white;
+    
+}
+
+a:hover {
+    color:rgb(235, 134, 134);
+}
+
 .table a:not(.btn) {
     text-decoration: none;
 }
