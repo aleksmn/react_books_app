@@ -6,6 +6,7 @@ import Contacts from './components/contacts';
 import NotFound from './components/notFound';
 import NavBar from './components/common/navBar';
 import Book from './components/book';
+import LoginForm from './components/loginForm';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           {/* <Route path="/" element={< Home />} /> */}
           <Route path="/books" element={< Books />} />
           <Route path="/books/:id" element={< Book />} />
+          <Route path="/login" element={< LoginForm />} />
           <Route path="/about" element={< About />} />
           <Route path="/contacts" element={< Contacts />} />
           <Route path="*" element={< NotFound />} />
