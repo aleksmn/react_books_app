@@ -1,12 +1,12 @@
-const Input = (props) => {
+const Input = ({ name, label, value, onChange }) => {
     return (
         <div className="mb-3">
-            <label htmlFor={props.name} className="form-label">{props.label}</label>
+            <label htmlFor={name} className="form-label">{label}</label>
             <input
-                value={props.value}
-                onChange={props.onChange}
-                id={props.name}
-                name={props.name}
+                value={value}
+                onChange={onChange}
+                id={name}
+                name={name}
                 type="text"
                 className="form-control"
             />

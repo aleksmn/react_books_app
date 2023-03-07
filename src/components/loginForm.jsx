@@ -25,6 +25,8 @@ class LoginForm extends Component {
 
 
     render() {
+        const { account } = this.state;
+
         return (
             <div className='container' style={{ 'maxWidth': '600px' }}>
                 <h1>Логин</h1>
@@ -32,13 +34,13 @@ class LoginForm extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <Input
                         name="username"
-                        value={this.state.account.username}
+                        value={account.username}
                         label="Имя пользователя"
                         onChange={this.handleChange}
                     />
                     <Input
                         name="password"
-                        value={this.state.account.password}
+                        value={account.password}
                         label="Пароль"
                         onChange={this.handleChange}
                     />
