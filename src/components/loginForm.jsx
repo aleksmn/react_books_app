@@ -2,31 +2,53 @@ import React, { Component } from 'react';
 
 
 class LoginForm extends Component {
+
+    state = {
+        account: { username: '', password: '' }
+    };
+
     handleSubmit = e => {
         e.preventDefault();
-
         console.log('Отправлено!')
-    }
+    };
+
+    handleChange = e => {
+        const account = { ...this.state.account }
+        // account.username = e.currentTarget.value;
+        account[e.currentTarget.name] = e.currentTarget.value;
+        this.setState({ account });
+    };
+
+
 
 
     render() {
         return (
-            <div className='container' style={{'maxWidth':'600px'}}>
+            <div className='container' style={{ 'maxWidth': '600px' }}>
                 <h1>Логин</h1>
 
                 <form onSubmit={this.handleSubmit}>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Электронная почта</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                        <div id="emailHelp" className="form-text">Мы не делимся вашими контактами</div>
+                        <label htmlFor="username" className="form-label">Имя пользователя</label>
+                        <input
+                            value={this.state.account.username}
+                            onChange={this.handleChange}
+                            id="username"
+                            name="username"
+                            type="text"
+                            className="form-control"
+                        />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Пароль</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" />
-                    </div>
-                    <div className="mb-3 form-check">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                        <label className="form-check-label" htmlFor="exampleCheck1">Присылать оповещения на почту</label>
+                        <label htmlFor="password" className="form-label">Пароль</label>
+                        <input
+                            value={this.state.account.password}
+                            onChange={this.handleChange}
+                            id="password"
+                            name="password"
+                            type="password"
+                            className="form-control"
+                        />
                     </div>
                     <button type="submit" className="btn btn-primary">Отправить</button>
                 </form>
