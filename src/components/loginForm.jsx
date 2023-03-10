@@ -37,11 +37,30 @@ class LoginForm extends Component {
         console.log('Отправлено!')
     };
 
+    validateProperty = input => {
+
+        if (input.name === 'username') {
+            if (input.value.trim() === '') return 'Нужно ввести имя пользователя.'
+            // ...
+        }
+        if (input.name === 'password') {
+            if (input.value.trim() === '') return 'Нужно ввести пароль.'
+            // ...
+        }
+
+    }
+
     handleChange = e => {
+
+        const errors = {...this.state.errors};
+        const errorMessage = this.validateProperty(e.currentTarget);
+
+        if (errorMessage) errors[e.currentTarget.name] = errorMessage;
+        else delete errors[e.currentTarget.name]
+
         const account = { ...this.state.account }
-        // account.username = e.currentTarget.value;
         account[e.currentTarget.name] = e.currentTarget.value;
-        this.setState({ account });
+        this.setState({ account, errors });
     };
 
 
@@ -58,6 +77,7 @@ class LoginForm extends Component {
                     <Input
                         name="username"
                         value={account.username}
+                        type="text"
                         label="Имя пользователя"
                         onChange={this.handleChange}
                         error={errors.username}
@@ -65,6 +85,7 @@ class LoginForm extends Component {
                     <Input
                         name="password"
                         value={account.password}
+                        type="password"
                         label="Пароль"
                         onChange={this.handleChange}
                         error={errors.password}
