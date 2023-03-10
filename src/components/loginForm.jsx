@@ -16,11 +16,11 @@ class LoginForm extends Component {
         const { account } = this.state;
 
         if (account.username.trim() === '') {
-            errors.username = 'Username is required.'
+            errors.username = 'Нужно ввести имя пользователя.'
         }
 
         if (account.password.trim() === '') {
-            errors.password = 'Password is required.'
+            errors.password = 'Нужно ввести пароль.'
         }
 
         return  Object.keys(errors).length === 0 ? null : errors;
