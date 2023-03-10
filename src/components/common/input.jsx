@@ -7,7 +7,7 @@ const Input = (props) => {
                 onChange={props.onChange}
                 id={props.name}
                 name={props.name}
-                type="text"
+                type={props.type}
                 className="form-control"
             />
         </div>

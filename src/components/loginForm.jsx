@@ -35,12 +35,14 @@ class LoginForm extends Component {
                         value={this.state.account.username}
                         label="Имя пользователя"
                         onChange={this.handleChange}
+                        type='text'
                     />
                     <Input
                         name="password"
                         value={this.state.account.password}
                         label="Пароль"
                         onChange={this.handleChange}
+                        type='password'
                     />
 
                     <button type="submit" className="btn btn-primary">Отправить</button>
