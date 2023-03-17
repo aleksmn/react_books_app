@@ -11,29 +11,23 @@ class LoginForm extends Component {
         errors: {}
     };
 
-    schema = Joi.object({
+    schema = {
         username: Joi.string().required(),
         password: Joi.string().required()
-    });
+    };
 
     validate = () => {
-        const result = Joi.validate(this.state.account, this.schema, {abortEarly: false});
+        const result = Joi.validate(this.state.account, this.schema, { abortEarly: false });
 
-        console.log(result)
+        if (!result.error) return null;
 
         const errors = {};
 
-        const { account } = this.state;
+        for (let item of result.error.details) errors[item.path[0]] = item.message;
 
-        if (account.username.trim() === '') {
-            errors.username = 'Нужно ввести имя пользователя.'
-        }
+        return errors;
 
-        if (account.password.trim() === '') {
-            errors.password = 'Нужно ввести пароль.'
-        }
 
-        return  Object.keys(errors).length === 0 ? null : errors;
     }
 
     handleSubmit = e => {
@@ -47,22 +41,31 @@ class LoginForm extends Component {
         console.log('Отправлено!')
     };
 
-    validateProperty = input => {
+    // validateProperty = input => {
 
-        if (input.name === 'username') {
-            if (input.value.trim() === '') return 'Нужно ввести имя пользователя.'
-            // ...
-        }
-        if (input.name === 'password') {
-            if (input.value.trim() === '') return 'Нужно ввести пароль.'
-            // ...
-        }
+    //     if (input.name === 'username') {
+    //         if (input.value.trim() === '') return 'Нужно ввести имя пользователя.'
+    //         // ...
+    //     }
+    //     if (input.name === 'password') {
+    //         if (input.value.trim() === '') return 'Нужно ввести пароль.'
+    //         // ...
+    //     }
+
+    // }
+
+    validateProperty = ({ name, value }) => {
+        const obj = {[name]: value };
+        const schema = { [name]: this.schema[name] }
+        const { error } = Joi.validate(obj, schema)
+        console.log(this.schema)
+        return error ? error.details[0].message : null;
 
     }
 
     handleChange = e => {
 
-        const errors = {...this.state.errors};
+        const errors = { ...this.state.errors };
         const errorMessage = this.validateProperty(e.currentTarget);
 
         if (errorMessage) errors[e.currentTarget.name] = errorMessage;
