@@ -40,11 +40,17 @@ class LoginForm extends Component {
     validateProperty = input => {
 
         if (input.name === 'username') {
-            if (input.value.trim() === '') return 'Нужно ввести имя пользователя.'
+            const usernameInput = input.value.trim()
+            const usernameRegex = /^[А-яA-z0-9_.]+$/
+            if (usernameRegex.test(usernameInput) === false) return 'Недопустимый символ'
+            if (usernameInput === '') return 'Нужно ввести имя пользователя.'
+            if (usernameInput.length < 5) return 'Имя пользователя не менее 5 символов'
+            if (usernameInput.length > 30) return 'Имя пользователя не более 30 символов'
             // ...
         }
         if (input.name === 'password') {
             if (input.value.trim() === '') return 'Нужно ввести пароль.'
+            if (input.value.trim().length < 12) return 'Пароль должен быть не менее 12 символов'
             // ...
         }
 
