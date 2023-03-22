@@ -11,8 +11,7 @@ class LoginForm extends Component {
     };
 
     validate = () => {
-        const errors = {};
-
+        const errors = {...this.state.errors};
         const { account } = this.state;
 
         if (account.username.trim() === '') {
@@ -42,8 +41,8 @@ class LoginForm extends Component {
         if (input.name === 'username') {
             const usernameInput = input.value.trim()
             const usernameRegex = /^[А-яA-z0-9_.]+$/
-            if (usernameRegex.test(usernameInput) === false) return 'Недопустимый символ'
             if (usernameInput === '') return 'Нужно ввести имя пользователя.'
+            if (usernameRegex.test(usernameInput) === false) return 'Недопустимый символ'
             if (usernameInput.length < 5) return 'Имя пользователя не менее 5 символов'
             if (usernameInput.length > 30) return 'Имя пользователя не более 30 символов'
             // ...
@@ -97,7 +96,7 @@ class LoginForm extends Component {
                         error={errors.password}
                     />
 
-                    <button type="submit" className="btn btn-primary">Отправить</button>
+                    <button disabled={this.validate()} className="btn btn-primary">Отправить</button>
                 </form>
 
 
