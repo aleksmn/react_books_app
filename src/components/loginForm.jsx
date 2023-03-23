@@ -1,43 +1,31 @@
-import React, { Component } from 'react';
-import Input from './common/input';
+import Form from './common/form';
 
 
 
-class LoginForm extends Component {
+class LoginForm extends Form {
 
     state = {
-        account: { username: '', password: '' },
+        data: { username: '', password: '' },
         errors: {}
     };
 
     validate = () => {
         const errors = {...this.state.errors};
-        const { account } = this.state;
+        const { data } = this.state;
 
-        if (account.username.trim() === '') {
+        if (data.username.trim() === '') {
             errors.username = 'Нужно ввести имя пользователя.'
         }
 
-        if (account.password.trim() === '') {
+        if (data.password.trim() === '') {
             errors.password = 'Нужно ввести пароль.'
         }
 
         return  Object.keys(errors).length === 0 ? null : errors;
     }
 
-    handleSubmit = e => {
-        e.preventDefault();
-
-        const errors = this.validate();
-        // console.log(errors);
-        this.setState({ errors: errors || {} });
-        if (errors) return;
-
-        console.log('Отправлено!')
-    };
 
     validateProperty = input => {
-
         if (input.name === 'username') {
             const usernameInput = input.value.trim()
             const usernameRegex = /^[А-яA-z0-9_.]+$/
@@ -52,51 +40,27 @@ class LoginForm extends Component {
             if (input.value.trim().length < 12) return 'Пароль должен быть не менее 12 символов'
             // ...
         }
-
     }
 
-    handleChange = e => {
-
-        const errors = {...this.state.errors};
-        const errorMessage = this.validateProperty(e.currentTarget);
-
-        if (errorMessage) errors[e.currentTarget.name] = errorMessage;
-        else delete errors[e.currentTarget.name]
-
-        const account = { ...this.state.account }
-        account[e.currentTarget.name] = e.currentTarget.value;
-        this.setState({ account, errors });
-    };
-
-
-
+    doSubmit = () => {
+        console.log('Отправлено!')
+    }
 
     render() {
-        const { account, errors } = this.state;
+        
 
         return (
             <div className='container' style={{ 'maxWidth': '600px' }}>
                 <h1>Логин</h1>
 
                 <form onSubmit={this.handleSubmit}>
-                    <Input
-                        name="username"
-                        value={account.username}
-                        type="text"
-                        label="Имя пользователя"
-                        onChange={this.handleChange}
-                        error={errors.username}
-                    />
-                    <Input
-                        name="password"
-                        value={account.password}
-                        type="password"
-                        label="Пароль"
-                        onChange={this.handleChange}
-                        error={errors.password}
-                    />
 
-                    <button disabled={this.validate()} className="btn btn-primary">Отправить</button>
+                    {this.renderInput("username", 'Имя пользователя')}
+                    {this.renderInput("password", 'Пароль', 'password')}
+                    
+                    {this.renderButton("Отправить")}
+
+                    
                 </form>
 
 
