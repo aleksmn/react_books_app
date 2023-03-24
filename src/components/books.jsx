@@ -6,6 +6,7 @@ import ListGroup from './common/listGroup';
 import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
 import _ from 'lodash';
+import SearchBox from './searchBox';
 
 // imrc - shortcut create react component
 // cc - create class
@@ -16,6 +17,8 @@ class Books extends Component {
     genres: [],
     pageSize: 4,
     currentPage: 1,
+    searchQuery: "",
+    selectedGenre: null,
     sortColumn: { path: 'title', order: 'asc' }
   };
 
@@ -50,8 +53,11 @@ class Books extends Component {
   handleGenreSelect = genre => {
     // console.log(genre);
 
-    this.setState({ selectedGenre: genre, currentPage: 1 })
+    this.setState({ selectedGenre: genre, searchQuery: "", currentPage: 1 })
   }
+  handleSearch = query => {
+    this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1 });
+  };
 
   handleSort = sortColumn => {
 
@@ -60,22 +66,30 @@ class Books extends Component {
 
   getPagedData = () => {
 
-    const { books, selectedGenre, sortColumn, currentPage, pageSize } = this.state;
+    const { books:allBooks, selectedGenre, sortColumn, currentPage, pageSize, searchQuery } = this.state;
 
-    const filteredBooks = selectedGenre && selectedGenre._id
-      ? books.filter(m => m.genre._id === selectedGenre._id)
-      : books;
+    // const filteredBooks = selectedGenre && selectedGenre._id
+    //   ? books.filter(m => m.genre._id === selectedGenre._id)
+    //   : books;
 
-    const sortedBooks = _.orderBy(filteredBooks, [sortColumn.path], [sortColumn.order])
+    let filtered = allBooks;
+    if (searchQuery)
+      filtered = allBooks.filter(m =>
+        m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+      );
+    else if (selectedGenre && selectedGenre._id)
+      filtered = allBooks.filter(m => m.genre._id === selectedGenre._id);
+
+    const sortedBooks = _.orderBy(filtered, [sortColumn.path], [sortColumn.order])
 
     const pagedBooks = paginate(sortedBooks, currentPage, pageSize);
 
-    return { totalCount: filteredBooks.length, books: pagedBooks }
+    return { totalCount: filtered.length, books: pagedBooks }
   }
 
   render() {
 
-    const { genres, selectedGenre, sortColumn, currentPage, pageSize } = this.state;
+    const { genres, selectedGenre, sortColumn, currentPage, pageSize, searchQuery } = this.state;
 
     if (this.state.books.length === 0) return <p>Здесь нет ни одной книги :(</p>
 
@@ -94,6 +108,7 @@ class Books extends Component {
           </div>
           <div className="col">
             <p>В списке книг: {result.totalCount}</p>
+            <SearchBox value={searchQuery} onChange={this.handleSearch} />
             <BooksTable
               books={result.books}
               sortColumn={sortColumn}
